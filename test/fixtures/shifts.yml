@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  finished_at: 2017-09-24 15:55:40
+  wage_earned: 9.99
+  tip_earned: 9.99
+  role: MyString
+  completed: false
+
+two:
+  finished_at: 2017-09-24 15:55:40
+  wage_earned: 9.99
+  tip_earned: 9.99
+  role: MyString
+  completed: false

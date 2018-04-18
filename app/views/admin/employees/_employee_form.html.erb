@@ -1,0 +1,61 @@
+<%=form_for [:admin, @employee] do |f|%>
+
+	<div class="form-group">
+		<%= f.label :name %><br />
+		<%= f.text_field :name, autofocus: true, required: true, class: "form-control"%>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :wage %><br />
+		<%= f.number_field :wage, autofocus: true, required: true, class: "form-control"%>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :position_id %><br />
+		<%=f.select :position_id, Position.order(:name).map{|position| [position.name, position.id, {"data-default-wage" => position.starting_wage}]},
+		{prompt: "Choose a position"},
+		{required: true, class: "form-control"}%>
+	</div>
+
+	<fieldset class="form-group">
+		<legend>Manager?</legend>
+		<div class="form-check">
+			<label class="form-check-label">
+				<%= f.radio_button :manager, "1", required: true, checked: @employee.manager?%>Yes
+			</label>
+		</div>
+		<div class="form-check">
+			<label class="form-check-label">
+				<%= f.radio_button :manager, "0", checked: !@employee.manager?%>No
+			</label>
+		</div>
+	</fieldset>
+
+	<div class="form-group">
+		<%= f.label :email %><br />
+		<%= f.email_field :email, autofocus: true, required: true, class: "form-control"%>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+		<%= f.password_field :password, autocomplete: "off", class: "form-control"%>
+		<% if @minimum_password_length %>
+		<br />
+		<em><%= @minimum_password_length %> characters minimum</em>
+		<% end %>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :password_confirmation %><br />
+		<%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control"%>
+	</div>
+
+	<div class="form-group">
+		<%= label :manager, "Your password" %> <i>(we need your current password to confirm your changes)</i><br />
+		<%= password_field :manager, :password, autocomplete: "off", required: true, class: "form-control"%>
+	</div>
+
+	<div class="actions text-center">
+		<%= f.submit "Update", class: "btn btn-primary" %>
+	</div>
+<% end %>

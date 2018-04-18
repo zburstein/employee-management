@@ -1,0 +1,34 @@
+<h1>Positions</h1>
+<%=render "admin/shared/create_button", path: new_admin_position_path, title: "Create Position"%>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Wage</th>
+			<th>Location</th>
+			<th>Associated Tip Percentages<br/>(solo, multiple)</th>
+			<th>Number of Employees</th>
+			<th/>
+		</tr>
+	</thead>
+	<tbody>
+		<%@positions.each do |position|%>
+			<tr>
+				<td><%=position.name%></td>
+				<td><%=number_to_currency position.starting_wage%></td>
+				<td><%=position.location%></td>
+				<%if position.associate_with_tip%>
+					<td><%="#{number_to_percentage(position.solo_associated_tip_percentage * 100, precision: 0)}, #{number_to_percentage(position.multi_associated_tip_percentage * 100, precision: 0)}"%></td>
+				<%else%>
+					<td>N/A</td>
+				<%end%>
+				<td><%=Employee.where(position: position).count%></td>
+				<td>
+					<%=render "admin/shared/edit_button", path: edit_admin_position_path(position)%>
+				</td>
+			</tr>
+		<%end%>
+	</tbody>
+</table>
+
+	

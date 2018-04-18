@@ -1,0 +1,11 @@
+<%test = fa_icon("arrow-left", class: "fa-2x") + '<h3 style="display: inline;">Payroll</h3>'.html_safe%>
+<%=link_to test, admin_weekly_payroll_path(@shift.weekly_payroll) %>
+<%#=button_to "#{@shift.employee.name}'s payroll for #{week_range(@shift.week)}", admin_weekly_payroll_path(@shift.weekly_payroll) %>
+
+<h1>Shift on <%=@shift.created_at.strftime("%m/%d/%Y")%></h1>
+<%=render "admin/shared/create_button", path: new_admin_sale_path, title: "Add sale", get_params: {shift: @shift}%>
+
+<%=render "admin/shared/shifts_table", shifts: [@shift], show: true%>
+
+<h3>Sales</h3>
+<%=@sales.empty? ? "<h4>No Sales in this shift</h4>".html_safe : render("admin/shared/sales_table") %>

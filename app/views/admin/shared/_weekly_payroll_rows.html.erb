@@ -1,0 +1,18 @@
+<%weekly_payrolls.each do |weekly_payroll|%>
+	<tr id="<%=weekly_payroll.employee.id%>_payroll" class="payroll-row" data-target="<%=weekly_payroll.id%>">
+		<%employee = weekly_payroll.employee%>
+		<%if controller_name == "employees"%>
+			<td><%=link_to weekly_payroll.week.date_started.strftime("%m/%d/%Y"), admin_weekly_payroll_path(weekly_payroll)%></td>
+		<%else%>
+			<td><%=link_to(employee.id, admin_employee_path(employee), class: "employee-link")%></td>
+			<td><%=employee.name%></td>
+		<%end%>
+
+		<%Date::DAYNAMES.each do |day|%>
+			<%hours_worked = weekly_payroll.hours_worked_per_day[day.downcase.to_sym] %>
+			<td><%=hours_worked != 0 && !hours_worked.nil? ? hours_worked : "-"%></td>
+		<%end%>
+		<td><%=weekly_payroll.total_hours_worked%></td>
+		<td><%=number_to_currency(weekly_payroll.total_wage)%></td>
+	</tr>
+<%end%>

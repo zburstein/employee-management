@@ -1,0 +1,37 @@
+<h1>Employee #<%=@employee.id%>(<%=@employee.name%>) Profile</h1>
+
+
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+	<li class="nav-item">
+		<a class="nav-link <%="active" if @active.nil?%>" data-toggle="tab" href="#employee_details" role="tab">Details</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" data-toggle="tab" href="#payrolls" role="tab">Payrolls</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link <%="active" if @active == "shifts"%>" data-toggle="tab" href="#shifts" role="tab">Shifts</a>
+	</li>
+
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+	<div class="tab-pane <%="active" if @active.nil?%>" id="employee_details" role="tabpanel">
+		<%=render "/shared/employee_details"%>
+		<%=link_to "Edit employee", edit_admin_employee_path(@employee)%>
+	</div>
+	<div class="tab-pane" id="payrolls" role="tabpanel">
+		<h3>Weekly Payrolls: Need to figure out putting dates</h3>
+		<%=render "admin/shared/weekly_payroll_table", weekly_payrolls: @weekly_payrolls%>
+	</div>
+	<div class="tab-pane <%="active" if @active == "shifts"%>" id="shifts" role="tabpanel">
+
+		<%=link_to "7 days", admin_employee_path(@employee, time: -7, active: "shifts")%> |
+		<%=link_to "30 days", admin_employee_path(@employee, time: -30, active: "shifts")%>
+		<h3>Shifts:</h3>
+		<%=render "admin/shared/shifts_table", shifts: @shifts%>
+	</div>
+
+</div>

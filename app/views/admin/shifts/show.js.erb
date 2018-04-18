@@ -1,0 +1,5 @@
+<%if @sales.count > 0%>
+	$(".modal-body").html("<%=escape_javascript(render 'admin/shared/sales_table')%>");
+<%else%>
+	$(".modal-body").html("<h1 class='text-center'>NO SALES</h1>");
+<%end%>

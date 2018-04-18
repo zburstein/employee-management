@@ -1,0 +1,38 @@
+
+<button type="button" class="btn btn-primary add-payroll" data-toggle="modal" data-target="#payrollModal">
+	Add Payroll<%=fa_icon "plus-circle", class: "fa-1x btn-icon"%>
+</button>
+
+<!-- The modal -->
+<div class="modal fade" id="payrollModal" tabindex="-1" role="dialog" aria-labelledby="modalLabelLarge" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+
+			<div class="modal-header">
+				<h4 class="modal-title" id="modalLabelLarge">Choose employee</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				
+			</div>
+
+			<div class="modal-body">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>EID</th>
+							<th>Name</th>
+							<th>Add</th>
+						</tr>
+					</thead>
+					<tbody id="employees_without_payroll">
+						<%=render "choose_employee_to_add"%>
+						
+					</tbody>
+				</table>
+		
+			</div>
+
+		</div>
+	</div>
+</div>

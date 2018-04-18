@@ -1,0 +1,6 @@
+<%#clear the existing content%>
+$("#tipDistributionTableBody").html("");
+<%@tip_pools.each do |pool|%>
+	<%row = "<tr><td>#{pool.employee.name}</td><td>#{pool.percentage_of_total * 100}%</td><td>#{number_to_currency(pool.amount_for_employee)}</td></tr>"%>
+	$("#tipDistributionTableBody").append("<%=row.html_safe%>");
+<%end%>

@@ -1,0 +1,9 @@
+<div id="<%=id%>-card" class="card text-center text-white bg-info <%="disabled-card disabled-link" if (id == "clock-in" && !!@employee.current_shift) || (id == "clock-out" && !@employee.current_shift) || (id == "tip" && !@employee.current_shift) || (id == "sale" && !@employee.current_shift)%>">
+	<%= link_to link_to_path, link_to_params do%>
+			<div class="card-body">
+				<h4 class="card-title"><%=title%></h4>
+				<%=fa_icon icon_name, class: "fa-4x"%>
+				<p class="card-text"><%=description%></p>
+			</div>
+	<%end%>
+</div>

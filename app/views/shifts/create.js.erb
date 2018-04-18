@@ -1,0 +1,26 @@
+$("#jsAlert").html("<%=@alert[:message]%>"); //replace alert content
+<%if @alert[:type] == "danger" && @shift%>
+	$("#jsAlert").append(" :<br>"+
+							"<ul>" +
+								"<%@shift.errors.full_messages.each do |message|%>" +
+									"<li><%=message%></li>" +
+								"<%end%>" +
+							"</ul>"); //replace alert content
+<%end%>
+$("#status").html("<%=@employee.current_shift ? 'Clocked In' : 'Off'%>")
+$("#jsAlert").removeClass(); //remove the classes
+$("#jsAlert").addClass("alert alert-<%=@alert[:type]%>"); //replace them with proper one for flash type
+
+<%if @alert[:type] == "success"%>
+	$("#clockInButton").attr("disabled", "disabled");
+	$("#clockOutButton").removeAttr("disabled");	
+	$("#showTipButton").removeAttr("disabled");
+
+	var disabled = "disabled-card disabled-link"
+	$("#clock-in-card").addClass(disabled);
+	$("#clock-out-card").removeClass(disabled);
+	$("#sale-card").removeClass(disabled);
+	$("#tip-card").removeClass(disabled);
+
+	//tip thing
+<%end%>	

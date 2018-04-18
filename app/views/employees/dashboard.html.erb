@@ -1,0 +1,53 @@
+<% provide(:title, "Dashboard") %>
+
+
+<h1>Welcome <%=@employee.name%>!</h1>
+<div id="jsAlert" class="alert" role="alert"></div>
+
+<h4 >status: <span id="status"><%=@employee.current_shift ? "Clocked In" : "Off Shift"%></span></h4>
+
+
+
+<div class="card-deck">
+
+
+
+	<%=render "shared/nav_card", title: "Clock In", icon_name: "sign-in", description: "Clock in to start your shift", id: "clock-in",
+		link_to_path: clock_in_path(@employee), 
+		link_to_params: {remote: true, method: :post, form: {id: "clockInForm"}, id: "clockInButton", disabled: !!@employee.current_shift, class: "card-link"}
+	%>
+	<%=render "shared/nav_card", title: "Clock Out", icon_name: "sign-out", description: "Clock out at the end of your shift", id: "clock-out",
+		link_to_path: clock_out_path(@employee), 
+		link_to_params:  {method: :patch, remote: true, form: {id: "clockOutForm"}, id: "clockOutButton", disabled: !@employee.current_shift, class: "card-link"}
+	%>
+
+	<%=render "shared/nav_card", title: "Sale", icon_name: "usd", description: "Enter a sale", id: "sale",
+		link_to_path: "#",
+		link_to_params:  {data: {toggle: "modal", target: "#saleModal"}, class: "card-link"}
+	%>
+
+
+</div>
+<div class="card-deck">
+	<%= render "shared/nav_card", title: "Get Current Tip", icon_name: "get-pocket", description: "Click to view current shift's tip total", id: "tip",
+		link_to_path: tip_path(@employee),
+		link_to_params: {remote: true, method: "get", form: {id: "showTipForm"}, id: "showTipButton", class: "card-link"}
+	%>
+
+	<%=render "shared/nav_card", title: "Edit Profile", icon_name: "user-circle",  description: "Click to edit profile settings", id: "edit-profile",
+		link_to_path: edit_employee_registration_path(@employee),
+		link_to_params: {class: "card-link"}
+	%>
+
+  	<%if current_employee.try(:manager?)%> 
+		<%=render "shared/nav_card", title: "Manager dashboard", icon_name: "tachometer", description: "Click to enter Manager's Dashboard", id: "admin-dashboard",
+			link_to_path: admin_manager_dashboard_path,
+			link_to_params: {class: "card-link"}
+		%>
+	<%end%>
+
+</div>
+
+<%=render "sales_modal"%>
+
+<%=render "current_tip"%>

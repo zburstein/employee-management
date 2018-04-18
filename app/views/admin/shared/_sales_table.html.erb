@@ -1,0 +1,43 @@
+<%=render "admin/shared/create_button", path: new_admin_sale_path, title: "Add sale", get_params: {shift: @shift}%>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<%headers = ["Sale ID", "Time", "Method of Payment", "Price", "Tip", "Associated Employees", "Tools", "", ""]%>
+			<%headers.each do |header|%>
+				<th><%=header.html_safe%></th>
+			<%end%>
+		</tr>
+	</thead>
+	<tbody>
+		<%@sales.each do |sale|%>
+			<tr>
+				<td><%=sale.id%></td>
+				<td><%=sale.created_at.strftime('%I:%M %p')%></td>
+				<td><%=sale.method_of_payment%></td>
+				<td><%=number_to_currency sale.price%></td>
+				<td><%=number_to_currency sale.tip%></td>
+				<td>
+					<%sale.tip_pools.each do |pool|%>
+						<%assoc_employee = pool.shift.employee%>
+						<%=link_to "#{assoc_employee.id} (#{assoc_employee.name})#{"," if !pool.equal? sale.tip_pools.last}", admin_employee_path(assoc_employee)%>
+					<%end%>
+				</td>
+				<td>
+					<%=button_to "See Tip Distribution", admin_tip_pool_path(sale), remote: true, method: "get", type: "button", class: "btn btn-primary btn-lg", data: {toggle: "modal", target: "#tipDistributionModal"}%>
+
+				</td>
+				<td>
+					<%=render "admin/shared/edit_button", path: edit_admin_sale_path(sale)%>
+				</td>
+				<td>
+					<%=render "admin/shared/delete_button", path: admin_sale_path(sale), confirm: "Are you sure you want to delete this sale? It will delete all tips associated with it!"%>
+
+				</td>
+
+			</tr>
+		<%end%>
+	</tbody>
+</table>
+
+
+<%=render "admin/shared/tip_distribution"%>

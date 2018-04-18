@@ -1,0 +1,43 @@
+
+
+
+<!-- The modal -->
+<div class="modal fade" id="saleModal" tabindex="-1" role="dialog" aria-labelledby="modalLabelLarge" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+
+			<div class="modal-header">
+				<h4 class="modal-title" id="modalLabelLarge">Enter Sale Info</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				
+			</div>
+
+			<div class="modal-body">
+				<%#=form_with model: Sale.new  do |f|%>
+				<%=form_for @sale, remote: true, params: {employee_id: "test"} do |f|%>
+
+					<%= f.label :method_of_payment, "Method of Payment:" %>
+					<%= f.label :method_of_payment, "Cash" %>
+					<%=f.radio_button :method_of_payment, "Cash", required: true%>
+					<%= f.label :method_of_payment, "Credit" %>
+					<%=f.radio_button :method_of_payment, "Credit", required: true%>
+					<%= f.label :method_of_payment, "Debit" %>
+					<%=f.radio_button :method_of_payment, "Debit", required: true%>
+					<br/>
+					<%=f.label :price%>
+					<%=f.number_field :price, step: :any%>
+					<br/>
+					<%=f.label :tip%>
+					<%=f.number_field :tip, step: :any, required: true%>
+					<br/>
+					<input value="53476" type="hidden" name="employee_id" id="employee_id">
+					<%=f.submit%>
+				<%end%>
+		
+			</div>
+
+		</div>
+	</div>
+</div>

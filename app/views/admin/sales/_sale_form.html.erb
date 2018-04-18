@@ -1,0 +1,26 @@
+<%=form_for [:admin, @sale] do |f|%>
+	<%= f.label :method_of_payment, "Method of Payment:" %>
+	<%= f.label :method_of_payment, "Cash" %>
+	<%=f.radio_button :method_of_payment, "Cash", required: true%>
+	<%= f.label :method_of_payment, "Credit" %>
+	<%=f.radio_button :method_of_payment, "Credit", required: true%>
+	<%= f.label :method_of_payment, "Debit" %>
+	<%=f.radio_button :method_of_payment, "Debit", required: true%>
+	<br/>
+	<%=f.label :price%>
+	$<%=f.number_field :price, step: 0.01, required: true%>
+	<br/>
+	<%=f.label :tip%>
+	$<%=f.number_field :tip, step: 0.01, required: true%>
+	<br/>
+	<%=f.label :created_at%>
+	<%=f.time_field :created_at, include_seconds: true, ampm: true, prompt: true, required: true%>
+	<%="<button id='current_time' type='button'>Current Time</button>".html_safe if action_name == "new"%>
+	<br/>
+	<%=f.label "Associated Shifts"%>
+	<%=f.select :associated_shift_ids, @shift.concurrent_shifts_eligible_for_tip.map{|shift| ["#{shift.id}: #{shift.employee.name}", shift.id]}, 
+	{selected: @sale.tip_pools.map{|pool| pool.shift_id}},
+	{multiple: true}%>  
+	<%=f.hidden_field :shift_id, value: @shift.id if action_name == "new"%>
+	<%=f.submit%>
+<%end%>

@@ -1,0 +1,40 @@
+<h2>Sign up</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autofocus: true, required: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :position %><br />
+      <%=f.select :position_id, Position.order(:name).map{|position| [position.name, position.id, {"data-default-wage" => position.starting_wage}]},
+      {prompt: "Choose a position"},
+      {required: true}%>
+  </div>
+
+  <div class="field">
+    <%= f.label :manager %><br />
+    Yes<%= f.radio_button :manager, "1", required: true%>
+    No<%= f.radio_button :manager, "0"%>
+  </div>
+
+  <div class="field">
+    <%= f.label :wage %><br />
+    <%= f.number_field :wage, autofocus: true, required: true %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, required: true %>
+  </div>
+
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>

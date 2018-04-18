@@ -1,0 +1,23 @@
+<%=form_for [:admin, @shift] do |f|%>
+	<%=f.label :position_id%>
+	<%=f.select :position_id, Position.order(:name).map{|position| [position.name, position.id]},
+	{selected: @employee.position.id, prompt: "Choose a position"},
+	{required: true}%>
+	<br/>
+	<%=f.label :wage%>
+	<%=f.number_field :wage, step: 0.01, value: @employee.wage, required: true%>
+	<br/>
+	<%=f.label :date_worked%>
+	<%=date_field :date_worked, :day, required: true, min: @week.date_started, max: @week.date_started + 6.days%>
+	<br/>
+	<%=f.label :created_at, "Shift start:"%>
+	<%=f.time_field(:created_at, include_seconds: true, ampm: true, prompt: true, required: true)%>
+	<br/>
+	<%=f.label :finished_at, "Shift completed:"%>
+	<%=f.time_field(:finished_at, include_seconds: true, ampm: true, prompt: true, required: true)%>
+	<br/>
+	<%=f.hidden_field :weekly_payroll_id, value: @weekly_payroll.id%>
+	<%=f.submit%>
+
+
+<%end%>

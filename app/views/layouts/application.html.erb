@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%=yield(:title)%></title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  	<div class="container-fluid">
+      <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Brand -->
+        <a class="navbar-brand" href="<%=root_path%>"><%=fa_icon "bomb", class: "navbar-brand fa-1x"%>The Bomb</a>
+
+
+        <!-- Links -->
+        <div class="collapse navbar-collapse" id="nav-content">   
+          <ul class="navbar-nav mr-auto">
+            <%if current_employee%>
+              <li class="nav-item">
+                <%=link_to "Employee Dashboard", employees_dashboard_path, class: "nav-link"%>
+              </li>
+            <%end%>
+            <%if current_employee.try(:manager?)%>
+              <li class="nav-item">
+                <%=link_to "Manager Dashboard", admin_manager_dashboard_path, class: "nav-link"%>
+              </li>
+            <%end%>
+          </ul>
+          <ul class="navbar-nav">
+            <%if current_employee%>
+              <li class="nav-item">
+                <%=button_to "Log Out", logout_path, method: "delete", class: "btn btn-outline-info my-2 my-sm-0" %>
+              </li>
+            <%end%>
+          </ul>
+        </nav>
+      <%if defined?(@back_button)%>
+        <%= button_to @back_button[:display], @back_button[:path], :method => "get" %>
+      <%end%>
+      <% flash.each do |message_type, message| %>
+        <%message_type = "danger" if message_type == "alert"%>
+        <%message_type = "success" if message_type == "notice"%>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
+    	<%= yield %>
+      <%= debug(params) if Rails.env.development? %>
+    </div>
+  </body>
+</html>

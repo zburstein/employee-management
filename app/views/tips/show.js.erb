@@ -1,0 +1,9 @@
+<%if current_shift = @employee.current_shift%>
+	$("#tipModalBody").html("<h1><%=number_to_currency(current_shift.tip_earned)%></h1>");
+	$("#tipModal").modal("show");
+<%else%>
+	$("#jsAlert").html("You are not clocked in"); //replace alert content
+	$("#jsAlert").addClass("alert alert-danger"); //replace them with proper one for flash type
+<%end%>
+
+

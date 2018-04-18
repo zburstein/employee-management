@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  solo_associated_tip_percentage: 9.99
+  multi_associated_tip_percentage: MyString
+  location: MyString
+  starting_wage: 9.99
+
+two:
+  name: MyString
+  solo_associated_tip_percentage: 9.99
+  multi_associated_tip_percentage: MyString
+  location: MyString
+  starting_wage: 9.99

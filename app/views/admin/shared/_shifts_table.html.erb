@@ -1,0 +1,52 @@
+<%total_wage_in_period = total_tip_in_period = total_worked_in_period = 0%>
+<table id="shifts_table" class="table table-striped">
+	<thead>
+		<tr>
+			<%headers = ["Date", "Hours", "Position", "Hours Worked", "Wage/hr", "Wage Earned", "Tip Earned", "", "", ""]%>
+			<%headers.each do |header|%>
+				<th><%=header%></th>
+			<%end%>
+		</tr>
+	</thead>
+	<tbody>
+		<%shifts.each do |shift|%>
+			<tr class="shift-row <%='table-success' if !shift.completed?%>" data-target="<%=shift.id%>">
+				<td><%=shift.created_at.strftime("%m/%d/%Y")%></td>
+				<td><%="#{shift.created_at.strftime('%I:%M %p')} - #{shift.finished_at&.strftime('%I:%M %p')}"%></td>
+				<td><%=shift.position.nil? ? shift.employee.position : shift.position.name%></td>
+				<td><%= shift.completed? ? time_worked = shift.hours_worked : "Active Shift" %></td>
+				<td><%=number_to_currency shift.wage%></td>
+				<td><%=number_to_currency(shift.wage_earned) ||  "Active Shift"%></td>
+				<td><%=number_to_currency(shift.tip_earned)%></td>
+
+				<%if false%>
+					<td><%=button_to("View", admin_shift_path(shift), method: "get") unless controller_name == "shifts" && action_name == "show" %></td>
+				<%end%>
+
+				<td><%=render "admin/shared/edit_button", path: edit_admin_shift_path(shift), custom_classes: "admin-function"%></td>
+				<td><%=render "admin/shared/create_button", path: new_admin_sale_path, title: "Add sale", get_params: {shift: shift}%></td>
+				<td>
+					<%=render "admin/shared/delete_button", path: admin_shift_path(shift), confirm: "Are you sure you want to delete this shift? It will delete all sales and tips associated with it."%>
+				</td>
+
+
+				<%total_tip_in_period += shift.tip_earned%>
+				<%total_wage_in_period += shift.wage_earned if !shift.wage_earned.nil?%>
+				<%total_worked_in_period += time_worked if shift.completed?%>
+			</tr>	
+		<%end%>
+		<%if !defined? show%> 
+			<tr>
+				<td/>
+				<td/>
+				<td>Total:</td>
+				<td><%=total_worked_in_period%></td>
+				<td/>
+				<td><%=number_to_currency(total_wage_in_period)%></td>
+				<td><%=number_to_currency(total_tip_in_period)%></td>	
+				<td/>
+				<td/>
+			</tr>
+		<%end%>
+	</tbody>
+</table>

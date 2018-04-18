@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  monday_hours: 9.99
+  tuesday_hours: 9.99
+  wednesday_hours: 9.99
+  thursday_hours: 9.99
+  friday_hours: 9.99
+  saturday_hours: 9.99
+  sunday_hours: 9.99
+  total_hours: 9.99
+  total_wage: 9.99
+
+two:
+  monday_hours: 9.99
+  tuesday_hours: 9.99
+  wednesday_hours: 9.99
+  thursday_hours: 9.99
+  friday_hours: 9.99
+  saturday_hours: 9.99
+  sunday_hours: 9.99
+  total_hours: 9.99
+  total_wage: 9.99

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  employee_id: 
+  name: MyString
+  position: MyString
+  wage: 9.99
+
+two:
+  employee_id: 
+  name: MyString
+  position: MyString
+  wage: 9.99

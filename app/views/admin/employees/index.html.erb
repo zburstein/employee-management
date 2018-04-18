@@ -1,0 +1,27 @@
+<h3>Employees:</h3>
+<%=render "admin/shared/create_button", path: new_employee_registration_path, title: "Create new employee"%>
+
+<table id="employees-table" class="table table-striped">
+	<thead>
+		<tr>
+			<th>EID</th>
+			<th>Name</th>
+			<th>Position</th>
+			<th>Manager?</th>
+		</tr>
+	</thead>
+	<tbody>
+		<%@employees.each do |employee|%>
+			<tr class="employee-row" data-target="<%=employee.id%>">
+				<td><%=employee.id%></td>
+				<td><%=employee.name%></td>
+				<td><%=employee.position&.name%></td>
+				<td><%=employee.manager? ? "Yes" : "No"%></td>
+			</tr>	
+		<%end%>
+	</tbody>
+</table>
+
+
+
+

@@ -1,0 +1,23 @@
+<table class="table table-striped" id="weekly_payrolls_table">
+	<thead>
+		<tr>
+			<%if controller_name == "employees"%> <%#if know who the employee is no need to name them%>
+				<th>Date Started</th>
+			<%else%>
+				<th>Employee ID</th>
+				<th>Name</th>
+			<%end%>
+			<%I18n.t('date.abbr_day_names').each_with_index do |day, index|%>
+				<%#dont need dates on employee index beacues they will al  be diff. just need day of the week%>
+				<th><%=day%><%="<br/>#{(week.date_started + index.days).strftime("%m/%d")}".html_safe if defined? week%></th> 
+			<%end%>
+			<th>Total Hours</th>
+			<th>Total Wage</th>
+
+		</tr>
+	</thead>
+	<tbody id="weekly_payroll_tbody">
+		<%#the loop that creates the rows%>
+		<%=render "admin/shared/weekly_payroll_rows", weekly_payrolls: weekly_payrolls, employee_index: (employee_index if defined? employee_index) %>
+	</tbody>
+</table>

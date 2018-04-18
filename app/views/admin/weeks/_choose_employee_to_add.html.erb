@@ -1,0 +1,7 @@
+<%@employees_without_payroll.each do |employee|%>
+	<tr id="<%="add_#{employee.id}"%>">
+		<td><%=employee.id%></td>
+		<td><%=employee.name%></td>
+		<td><%=link_to fa_icon("plus", class: "test fa-2x"), admin_weekly_payrolls_path(employee: employee, week: @week), remote: true, method: "post"%></td>
+	</tr>
+<%end%>

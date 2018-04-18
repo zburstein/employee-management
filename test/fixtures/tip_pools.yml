@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  employee: one
+  tip: one
+  amount_for_employee: 9.99
+  percentage_of_total: 9.99
+  main_employee: false
+
+two:
+  employee: two
+  tip: two
+  amount_for_employee: 9.99
+  percentage_of_total: 9.99
+  main_employee: false

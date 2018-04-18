@@ -1,0 +1,7 @@
+//show the payrolls 
+$("#weekly_payrolls_table").html("<%=escape_javascript(render 'admin/shared/weekly_payroll_table', weekly_payrolls: @weekly_payrolls, week: @week)%>");
+<%title = "Weekly Payrolls for #{@week.date_started.strftime("%m/%d")} - #{(@week.date_started + 6.days).strftime("%m/%d/%Y")}"%>
+$("#weekly_payrolls_title").html("<%=escape_javascript(title)%>");
+
+//add the employees without payroll to the modal
+$("#employees_without_payroll").html("<%=escape_javascript(render 'choose_employee_to_add')%>");

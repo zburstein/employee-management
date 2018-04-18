@@ -1,0 +1,11 @@
+$("#jsAlert").html("<%=@alert[:message]%>")
+<%if @alert[:type] == "danger" && @shift%>
+	$("#jsAlert").append(" :<br>"+
+							"<ul>" +
+								"<%@sale.errors.full_messages.each do |message|%>" +
+									"<li><%=message%></li>" +
+								"<%end%>" +
+							"</ul>"); //replace alert content
+<%end%>
+$("#jsAlert").removeClass(); //remove the classes
+$("#jsAlert").addClass("alert alert-<%=@alert[:type]%>"); //replace them with proper one for flash type

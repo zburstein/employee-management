@@ -1,0 +1,21 @@
+<%=form_for [:admin, @shift] do |f|%>
+	<%=f.label :position_id%>
+	<%=f.select :position_id, Position.order(:name).map{|position| [position.name, position.id]}, selected: @shift.position.id%>
+	<br/>
+	*Changing position to one unassociated with tips will deassociate employee. Changing position to one that is associated will associate them to sales made during their shift. Will not remove them from sales that they made though
+	<br/>
+	<%=f.label :wage%>
+	<%=f.number_field :wage, step: 0.01%>
+	<br/>
+	<%=f.label :created_at, "Shift start:"%>
+	<%=f.time_select(:created_at, include_seconds: true, ampm: true)%>
+	<br/>
+	<%if @shift.completed?%>
+		<%=f.label :finished_at, "Shift completed:"%>
+		<%=f.time_select(:finished_at, include_seconds: true, ampm: true)%>
+		<br/>
+	<%end%>
+	<%=f.submit%>
+
+
+<%end%>

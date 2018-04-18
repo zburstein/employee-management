@@ -1,0 +1,20 @@
+<h1>Manager's Dashboard</h1>
+
+<div class="card-deck">
+
+	<%=render "shared/nav_card", title: "Weekly Payroll", icon_name: "calendar", description: "Manage Weekly Payrolls", id: "weekly-payroll",
+		link_to_path: admin_week_path(Week.current), 
+		link_to_params: {class: "card-link"}
+	%>
+
+	<%=render "shared/nav_card", title: "Manage Employees", icon_name: "address-card-o", description: "Create/Manage Employee Details", id: "manage-employees",
+		link_to_path: admin_employees_path, 
+		link_to_params: {class: "card-link"}
+	%>
+
+	<%=render "shared/nav_card", title: "Manage Positions", icon_name: "book", description: "Create/Manage Positions", id: "manage-positions",
+		link_to_path: admin_positions_path, 
+		link_to_params: {class: "card-link"}
+	%>
+
+</div>

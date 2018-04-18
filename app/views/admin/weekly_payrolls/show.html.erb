@@ -1,0 +1,17 @@
+
+<%week = @weekly_payroll.week%>
+<%test = fa_icon("arrow-left", class: "fa-2x") + '<h3 style="display: inline;">Payroll Index</h3>'.html_safe%>
+<%=link_to test, admin_week_path(week) %>
+
+<h1><%="#{@weekly_payroll.employee.name}'s payroll for #{week_range(week)}"%></h1>
+
+<%=render "admin/shared/weekly_payroll_table", weekly_payrolls: [@weekly_payroll], week: week%>
+
+<h1>Shifts</h1> 
+<%=render "admin/shared/create_button", path: new_admin_shift_path(weekly_payroll: @weekly_payroll), title: "Add Shift", get_params: {weekly_payroll: @weekly_payroll}%>
+<%=render "admin/shared/shifts_table", shifts: @shifts%>
+
+<%=render "sales_index_modal"%>
+
+
+

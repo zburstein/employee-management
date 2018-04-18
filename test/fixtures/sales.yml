@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  price: 9.99
+  tip: 9.99
+  method: MyString
+  associated_employees: 
+
+two:
+  price: 9.99
+  tip: 9.99
+  method: MyString
+  associated_employees: 

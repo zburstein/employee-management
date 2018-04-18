@@ -1,0 +1,19 @@
+$("#jsAlert").html("<%=@alert[:message]%>");
+$("#jsAlert").removeClass(); //remove the classes
+$("#jsAlert").addClass("alert alert-<%=@alert[:type]%>"); //replace them with proper one for flash type
+<%if @alert[:type] == "danger"%>
+	$("#jsAlert").append(" :<br>"+
+							"<ul>" +
+								"<%@weekly_payroll.errors.full_messages.each do |message|%>" +
+									"<li><%=message%></li>" +
+								"<%end%>" +
+							"</ul>"); //replace alert content
+
+<%else%>
+	$("#weekly_payroll_tbody").append("<%=escape_javascript(render('admin/shared/weekly_payroll_rows', weekly_payrolls: [@weekly_payroll]))%>");
+<%end%>
+
+$("#payrollModal").modal("hide"); //hide hte modal
+$("#add_<%=@weekly_payroll.employee.id%>").remove();//and remove the employee from the modal
+$("#<%=@weekly_payroll.employee.id%>_payroll").addClass("table-success");
+
